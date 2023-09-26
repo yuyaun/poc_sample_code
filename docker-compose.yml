@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  nats:
+    image: nats:2.7.4-alpine3.15
+    restart: always
+    ports:
+      - "4222:4222"
+      - "6222:6222"
+      - "8222:8222"
+    command: -js

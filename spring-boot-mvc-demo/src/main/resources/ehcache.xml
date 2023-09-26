@@ -1,0 +1,33 @@
+<ehcache>
+
+    <!--
+        磁碟儲存:將快取中暫時不使用的物件,轉移到硬碟,類似於Windows系統的虛擬記憶體
+        path:指定在硬碟上儲存物件的路徑
+        path可以配置的目錄有：
+            user.home（使用者的家目錄）
+            user.dir（使用者當前的工作目錄）
+            java.io.tmpdir（預設的臨時目錄）
+            ehcache.disk.store.dir（ehcache的配置目錄）
+            絕對路徑（如：d:\\ehcache）
+        檢視路徑方法：String tmpDir = System.getProperty("java.io.tmpdir");
+     -->
+    <diskStore path="java.io.tmpdir" />
+
+    <!--
+        defaultCache:預設的快取配置資訊,如果不加特殊說明,則所有物件按照此配置項處理
+        maxElementsInMemory:設定了快取的上限,最多儲存多少個記錄物件
+        eternal:代表物件是否永不過期 (指定true則下面兩項配置需為0無限期)
+        timeToIdleSeconds:最大的發呆時間 /秒
+        timeToLiveSeconds:最大的存活時間 /秒
+        overflowToDisk:是否允許物件被寫入到磁碟
+        說明：下列配置自快取建立起600秒(10分鐘)有效 。
+        在有效的600秒(10分鐘)內，如果連續120秒(2分鐘)未訪問快取，則快取失效。
+        就算有訪問，也只會存活600秒。
+     -->
+    <defaultCache maxElementsInMemory="10000" eternal="false"
+                  timeToIdleSeconds="600" timeToLiveSeconds="600" overflowToDisk="true" />
+
+    <cache name="articleCache" maxElementsInMemory="10000" eternal="false"
+           timeToIdleSeconds="120" timeToLiveSeconds="600" overflowToDisk="true" />
+
+</ehcache>
