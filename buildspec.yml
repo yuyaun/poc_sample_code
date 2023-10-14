@@ -24,6 +24,7 @@ phases:
     - echo Writing image definitions file...
     - aws eks --region us-east-2 update-kubeconfig --name my-cluster
     - kubectl get ns
+
     # - printf '[{"name":"poc","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 # artifacts:
 #   files: imagedefinitions.json
