@@ -23,7 +23,9 @@ phases:
     - docker push $REPOSITORY_URI:$IMAGE_TAG
     - echo Writing image definitions file...
     - aws eks --region us-east-2 update-kubeconfig --name my-cluster
-    - kubectl get ns
+    - kubectl version
+    - kubectl set image deployment/api-server api-server=030304881571.dkr.ecr.us-east-2.amazonaws.com/poc
+    - kubectl rollout restart deployment api-server
 
     # - printf '[{"name":"poc","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 # artifacts:
